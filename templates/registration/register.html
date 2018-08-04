@@ -1,0 +1,42 @@
+{% extends 'layout/users.html' %}
+{% block title %}Sign up | Kakit's blog{% endblock title %}
+{% block content %}
+<h3>Welcome</h3>
+<form action="{% url 'users:register' %}" name="f" method="post">
+    {% csrf_token %}
+    <div class="input_outer">
+        <span class="icon_user"></span>
+        {{ form.username }}
+    </div>
+    {{ form.username.errors }}
+    <div class="input_outer">
+        <span class="icon_email"></span>
+        {{ form.email }}
+    </div>
+    {{ form.email.errors }}
+    <div class="input_outer">
+        <span class="icon_pwd"></span>
+        {{ form.password1 }}
+    </div>
+    {{ form.password1.errors }}
+    <div class="input_outer">
+        <span class="icon_pwd"></span>
+        {{ form.password2 }}
+    </div>
+    {{ form.password2.errors }}
+    {{ form.non_field_errors }}
+    <div class="mb2">
+        <button type="submit" class="act-but submit" style="color: #FFFFFF">Sign up</a>
+    </div>
+    <input type="hidden" name="next" value="{{ next }}"/>
+</form>
+
+<div class="bottom-href">
+    <a href="{% url 'users:login' %}">Sign In</a>
+    <span style="color: black">|</span>
+    <a href="/">Home Page</a>
+    <span style="color: black">|</span>
+    <a href="/">Forget Password</a>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'layout/users.html' %}
+{% block title %}Sign in | Kakit's blog{% endblock title %}
+{% block content %}
+<h3>Welcome</h3>
+<form action="{% url 'users:login' %}" name="f" method="post">
+    {% csrf_token %}
+    <div class="input_outer">
+        <span class="icon_user"></span>
+        <!-- <input name="logname" class="text" type="text" placeholder="username"> -->
+        {{ form.username }}
+    </div>
+    {{ form.username.errors }}
+    <div class="input_outer">
+        <span class="icon_pwd"></span>
+        <!-- <input name="logpass" class="text" type="password" placeholder="password"> -->
+        {{ form.password }}
+    </div>
+    {{ form.password.errors }}
+    {{ form.non_field_errors }}
+    <div class="mb2">
+        <button type="submit" class="act-but submit" style="color: #FFFFFF">Sign in</a>
+    </div>
+    <input type="hidden" name="next" value="{{ next }}"/>
+</form>
+
+<div class="third-party">
+    <span style="color: #636566; font-size: 0.6em; padding-right: 0.5em; text-align: center">Third-Party:</span>
+    {% load oauth_tags %}
+    <a href="{% get_authorization_url 'github' next %}">
+        <span class="fa fa-github fa-2x"></span>
+    </a>
+</div>
+
+<div class="bottom-href">
+    <a href="{% url 'users:register' %}">Sign up</a>
+    <span style="color: black">|</span>
+    <a href="/">Home Page</a>
+    <span style="color: black">|</span>
+    <a href="{% url 'users:password_reset' %}">Forget Password</a>
+</div>
+
+{% endblock content %}

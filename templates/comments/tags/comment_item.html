@@ -1,0 +1,25 @@
+<li class="comment-item {{ ident_class }}">
+    <div id="div-comment-{{ comment.pk }}">
+        <a class="user-avatar" href="#">
+            <img src="/media/{{ comment.author.mugshot }}"/>
+        </a>
+        <span class="nickname">
+            {% if comment.author.nickname %}
+                {{ comment.author.nickname }}
+            {% else %}
+                {{ 匿名用户 }}
+            {% endif %}
+
+            {% if comment.superior %}
+                @{{ comment.superior.author.nickname }}
+            {% endif %}
+        </span>
+        <time class="submit-date">{{ comment.created_time }}</time>
+        <div class="text comment-body">
+            {{ comment.body|linebreaks }}
+        </div>
+        <div class="reply comment-body">
+            <a rel="nofollow" href="javascript:void(0)" onclick="show_reply_box({{ comment.pk }})">回复</a>
+        </div>
+    </div>
+</li>

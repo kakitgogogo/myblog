@@ -1,0 +1,23 @@
+#!/bin/bash
+
+NAME="myblog"
+DIR=/home/kakit/myblog
+SOCKFILE=/tmp/kakit.top.socket
+WORKERS=3
+
+source /home/kakit/env/python3/bin/activate
+cd $DIR
+
+export PRODUCTION=1
+
+if [ $# != 0 ] 
+then
+    pip3 install -r requirements.txt
+    python3 manage.py collectstatic --noinput
+    python3 manage.py migrate
+fi
+
+gunicorn myblog.wsgi:application \
+--name $NAME \
+--workers $WORKERS \
+--bind unix:$SOCKFILE

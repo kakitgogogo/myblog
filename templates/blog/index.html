@@ -1,0 +1,90 @@
+{% extends 'layout/blog.html' %}
+{% load blog_tags %}
+
+{% block main %}
+    {% for post in post_list %}
+        <article class="post post-{{ post.pk }}">
+            <header class="entry-header">
+                <h1 class="entry-title">
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                </h1>
+                <div class="entry-meta">
+                    <span class="post-category">
+                        <a href="{% url 'blog:category' post.category.pk %}">{{ post.category.name }}</a>
+                    </span>
+                    <span class="post-date">
+                        <a href="{% url 'blog:archive' post.created_time.year post.created_time.month %}">
+                            <time class="entry-date" datetime="{{ post.created_time }}">{{ post.created_time }}</time>
+                        </a>
+                    </span>
+                    <span class="post-author">
+                        <a href="#">{{ post.author.nickname }}</a>
+                    </span>
+                    <span class="comments-link">
+                        <a href="{{ post.get_absolute_url }}#comment-area">{{ post.comment_set.count }} 评论</a>
+                    </span>
+                    <span class="views-count">
+                        <a href="{{ post.get_absolute_url }}">{{ post.views }} 阅读</a>
+                    </span>
+                    {% if user.is_superuser %}
+                    <span class="post-edit">
+                        <a href="{% url 'blog:edit' post.pk %}">编辑</a>
+                    </span>
+                    {% endif %}
+                </div>
+            </header>
+            <div class="entry-content clearfix">
+                <div id="post{{ post.pk }}-excerpt" class="centent-box">  
+                    <textarea id="textarea-{{ post.pk }}" style="display:none;">        
+{{ post.body }}
+                    </textarea>
+                </div>
+                <script type="text/javascript">
+                    $(function() {
+                        editormd.markdownToHTML("post{{ post.pk }}-excerpt", {
+                            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                            emoji           : true,
+                            taskList        : true,
+                            tex             : true,  // 默认不解析
+                            flowChart       : true,  // 默认不解析
+                            sequenceDiagram : true,  // 默认不解析
+                        });
+                    });
+                </script>
+                <div class="read-more cl-effect-14">
+                    <a href="{{ post.get_absolute_url }}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+                </div>
+            </div>
+        </article>
+    {% empty %}
+        <div class="no-post">暂时还没有发布的文章</div>
+    {% endfor %}
+
+    {% if is_paginated %}
+    <div class="page-icon">
+        {% if first %}
+            <a href="?page=1">1</a>
+        {% endif %}
+        {% if left %}
+            {% if left_has_more %}
+                <span class="ellipsis">...</span>
+            {% endif %}
+            {% for i in left %}
+                <a href="?page={{ i }}">{{ i }}</a>
+            {% endfor %}
+        {% endif %}
+        <a href="?page={{ page_obj.number }}" class="page-current">{{ page_obj.number }}</a>
+        {% if right %}
+            {% for i in right %}
+                <a href="?page={{ i }}">{{ i }}</a>
+            {% endfor %}
+            {% if right_has_more %}
+                <span class="ellipsis">...</span>
+            {% endif %}
+        {% endif %}
+        {% if last %}
+            <a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock main %}

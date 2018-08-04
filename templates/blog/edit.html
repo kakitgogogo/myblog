@@ -1,0 +1,103 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>Editor | Kakit's Blog</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.min.css' %}" />
+</head>
+<body>
+<div class="container-fluid">
+    <div id="layout">
+        <header>
+            <h1>编辑文章{{ post_id }}</h1>
+            <a href="{% url 'blog:index' %}">回到首页</a>
+        </header>
+        <form action="{% url 'blog:edit' post_id %}" method="post">
+            {% csrf_token %}
+            <div class="form-group form-layout">
+                {{ form.title.label_tag }}
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
+            <div id="editormd">
+                <!-- <textarea style="display:none;">
+                </textarea> -->
+                {{ form.body }}
+                {{ form.body.errors }}
+            </div>
+            <div class="form-group form-layout">
+                {{ form.category.label_tag }}
+                {{ form.category }}
+                {{ form.category.errors }}
+            </div>
+            <div class="form-inline form-layout">
+                <input id="new-category-name" type="text" class="form-control" style="width:50%; margin-right:10px;" placeholder="分类名称">
+                <button id="add-category" type="button" class="btn btn-default btn-xs">增加分类</button>
+            </div>
+            <div class="form-group form-layout">
+                {{ form.tags.label_tag }}
+                {{ form.tags }}
+                {{ form.tags.errors }}
+            </div>
+            <div class="form-inline form-layout">
+                <input id="new-tag-name" type="text" class="form-control" style="width:50%; margin-right:10px;" placeholder="标签名称">
+                <button id="add-tag" type="button" class="btn btn-default btn-xs">增加标签</button>
+            </div>
+            <div class="form-group form-layout">
+                {{ form.access_level.label_tag }}
+                {{ form.access_level }}
+                {{ form.access_level.errors }}
+            </div>
+            <div class="form-group form-layout">
+                {{ form.sticky.label_tag }}
+                {{ form.sticky }}
+                {{ form.sticky.errors }}
+            </div>
+            <div style="text-align: center; margin-bottom: 80px">
+                <button class="btn btn-default btn-lg" type="submit">提交</button>
+                <button class="btn btn-default btn-lg" type="button" 
+                    onclick="window.location.href='{% url 'blog:detail' post_id %}'">取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+    <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{% static 'mdeditor/editormd.min.js' %}"></script>
+    <script src="{% static 'blog/js/blog.js' %}"></script>
+    <script type="text/javascript">
+        var testEditor;
+
+        $(function() {
+            editormd.emoji     = {
+                path  : "http://www.emoji-cheat-sheet.com/graphics/emojis/",
+                ext   : ".png"
+            };
+            // Twitter Emoji (Twemoji)  graphics files url path    
+            editormd.twemoji = {
+                path : "http://twemoji.maxcdn.com/72x72/",
+                ext  : ".png"
+            };
+            testEditor = editormd("editormd", {
+                width   : "90%",
+                height  : 640,
+                syncScrolling : "single",
+                path    : "{% static 'mdeditor/lib/' %}",
+
+                imageUpload : true,
+                imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL : "{% url 'blog:upload_image' %}",
+
+                emoji   : true,
+
+                theme   : "dark",
+                previewTheme : "dark",
+                editorTheme  : "pastel-on-dark"
+            });
+        });
+    </script>
+</body>
+</html>

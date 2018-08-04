@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}Kakit's blog{% endblock title %}</title>
+    
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'users/css/normalize.css' %}" />
+    <link rel="stylesheet" href="{% static 'users/css/demo.css' %}" />
+    <link rel="stylesheet" href="{% static 'users/css/component.css' %}" />
+    <!--[if IE]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+
+    <style>
+        .errorlist {
+            color: black;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container demo-1">
+        <div class="content">
+            <div id="large-header" class="large-header">
+                <canvas id="demo-canvas"></canvas>
+                <div class="logo_box">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'users/js/TweenLite.min.js' %}"></script>
+    <script src="{% static 'users/js/EasePack.min.js' %}"></script>
+    <script src="{% static 'users/js/rAF.js' %}"></script>
+    <script src="{% static 'users/js/demo-1.js' %}"></script>
+</body>        
+</html>

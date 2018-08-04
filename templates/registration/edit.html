@@ -1,0 +1,54 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title> 修改个人信息 | Kakit's Blog</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="{% static 'users/css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <div class="card">
+            <form action="{% url 'users:edit' user_id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-content">
+                    <div class="picture-container">
+                        <div class="picture">
+                            <img src="/media/{{ user.mugshot }}" id="user-mugshot" class="picture-src"/>
+                            <!-- <input type="file" name="mugshot" id="mugshot"> -->
+                            {{ form.upload_mugshot }}
+                            {{ form.upload_mugshot.errors }}
+                        </div>
+                        <h6>选择图片</h6>
+                    </div>
+                    <div class="textinfo-container">
+                        <div class="form-group">
+                            <label for="id_nickanme">昵称</label>
+                            {{ form.nickname }}
+                            {{ form.nickname.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_email">电子邮箱</label>
+                            {{ form.email }}
+                            {{ form.email.errors }}
+                        </div>
+                    </div>
+
+                    <div style="text-align: center">
+                        <button class="btn btn-default" type="submit">保存</button>
+                        <button class="btn btn-default" type="button" 
+                            onclick="window.location.href='{% url 'blog:index' %}'">取消</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'users/js/userinfo.js' %}"></script>
+
+</body>
+</html>

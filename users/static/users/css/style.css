@@ -1,0 +1,75 @@
+.form-container {
+    padding-top: 100px;
+    z-index: 3;
+    max-width: 66.67%;
+    margin-left: 16.67%;
+}
+
+.card {
+    background-color: #FFFFFF;
+    padding: 10px 0 20px;
+    width: 100%;
+    min-height: 410px;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.form-header {
+    font-weight: 200;
+    text-align: center;
+}
+
+.form-content {
+    min-height: 340px;
+    padding: 20px 10px;
+}
+
+.picture-container {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+.picture-container .picture {
+    width: 106px;
+    height: 106px;
+    background-color: #999999;
+    border: 4px solid #CCCCCC;
+    color: #FFFFFF;
+    border-radius: 50%;
+    margin: 5px auto;
+    overflow: hidden;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+.picture-container .picture:hover {
+    border-color: #73ecb4;
+}
+.picture-container .picture-src {
+    width: 100%;
+}
+.picture-container .picture input[type="file"] {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+h3, .h3 {
+    font-size: 28px;
+    margin: 20px 0 10px;
+}
+
+h6, .h6 {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #999999;
+}
+
+.textinfo-container {
+    padding: 20px 10px;
+}
