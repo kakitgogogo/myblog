@@ -34,5 +34,6 @@ urlpatterns = [
     path('oauth/', include('oauth.urls')),
     path('search/', include('haystack.urls')),
     path('all/rss/', MyBlogFeed(), name='rss'),
+    path('gallery/', include('gallery.urls')),
     url(r'^(?P<path>.*)$', serve, {'document_root': BASE_DIR}),
 ]

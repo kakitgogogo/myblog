@@ -169,6 +169,11 @@ class PostCreateView(CreateView):
         self.object = form.save(commit=False)
         self.object.author = self.request.user
         self.object.save()
+
+        tag_id_list = self.request.POST.getlist('tags')
+        for tag_id in tag_id_list:
+            self.object.tags.add(Tag.objects.get(pk=tag_id))
+        self.object.save()
             
         return redirect(self.object)
 
@@ -200,6 +205,12 @@ class PostEditView(UpdateView):
             return redirect('users:login')
 
         self.object = form.save(commit=False)
+
+        tag_id_list = self.request.POST.getlist('tags')
+        self.object.tags.clear()
+        for tag_id in tag_id_list:
+            self.object.tags.add(Tag.objects.get(pk=tag_id))
+
         self.object.save()
             
         return redirect(self.object)

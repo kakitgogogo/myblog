@@ -3,7 +3,7 @@
 NAME="myblog"
 DIR=/home/kakit/myblog
 SOCKFILE=/tmp/kakit.top.socket
-WORKERS=3
+WORKERS=2
 
 source /home/kakit/env/python3/bin/activate
 cd $DIR

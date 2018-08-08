@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'blog',
     'comments',
     'haystack',
+    'gallery',
 ]
 
 MIDDLEWARE = [
@@ -303,3 +304,5 @@ EMAIL_HOST_USER = EMAIL_SETTING['USER']
 EMAIL_HOST_PASSWORD = EMAIL_SETTING['PASSWORD']
 EMAIL_PORT = EMAIL_SETTING['PORT']
 DEFAULT_FROM_EMAIL = EMAIL_SETTING['FROM_EMAIL']
+
+# Image Manager Setting
