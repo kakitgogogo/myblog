@@ -31,6 +31,8 @@ class BlogUser(AbstractUser):
     date_modified = models.DateTimeField(_('date modified'), default=now)
     email = models.EmailField(_('email address'), blank=True, null=True, unique=True, error_messages={'unique':'The email address is already occupied'})
 
+    unread_message_count = models.IntegerField(_('number of unread messages'), default=0)
+
     class Meta(AbstractUser.Meta):
         pass
 

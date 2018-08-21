@@ -199,8 +199,12 @@
         <section>
             <ul class="links">
                 <li>
-                    <a href="#">
-                        <p>消息列表</p>
+                    <a href="{% url 'message:index' user.pk %}">
+                        <p>消息列表
+                        {% if user.unread_message_count %}
+                        ({{ user.unread_message_count }}条未读)
+                        {% endif %}
+                        </p>
                     </a>
                 </li>
                 <li>

@@ -7,6 +7,7 @@ from users.admin import *
 from oauth.admin import *
 from blog.admin import *
 from comments.admin import *
+from message.admin import *
 
 class BlogAdminSite(AdminSite):
     site_header = 'Blog administration'
@@ -26,5 +27,6 @@ admin_site.register(Post, PostAdmin)
 admin_site.register(Category, CategoryAdmin)
 admin_site.register(Tag, TagAdmin)
 admin_site.register(Comment, CommentAdmin)
+admin_site.register(Message, MessageAdmin)
 
 admin_site.register(Site, SiteAdmin)

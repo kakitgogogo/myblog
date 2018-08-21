@@ -1,0 +1,36 @@
+{% extends 'layout/blog.html' %}
+
+{% block main %}
+<div class="message-area">
+    <ul list-style-type : disc>
+        {% for message in message_list %}
+        <li>
+            <div class="message-item">
+                {% if forloop.counter > unread_count %}
+                    <p>
+                        {{ message.content|safe }}
+                    </p>
+                {% else %}
+                    <p style="font-weight:700">
+                        {{ message.content|safe }}
+                    </p>
+                {% endif %}
+            </div>
+        </li>
+        {% empty %}
+            <div class="no-post">暂时还没有消息</div>
+        {% endfor %}
+    </ul>
+
+    {% if page_obj.has_previous or page_obj.has_next %}
+        <div class="page-icon">
+            {% if page_obj.has_previous %}<a href="?q={{ query }}&amp;page={{ page_obj.previous_page_number }}">{% endif %}
+                &laquo; 上一页
+            {% if page_obj.has_previous %}</a>{% endif %}
+            {% if page_obj.has_next %}<a href="?q={{ query }}&amp;page={{ page_obj.next_page_number }}">{% endif %}
+                下一页 &raquo;
+            {% if page_obj.has_next %}</a>{% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock main %}

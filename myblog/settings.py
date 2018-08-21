@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'comments',
     'haystack',
     'gallery',
+    'message',
 ]
 
 MIDDLEWARE = [
